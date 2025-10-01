@@ -10,8 +10,8 @@ nn = 0
 
 modelname = "deepseek-r1_70b"
 
-with open('g_t_a_dataset.csv', 'r', newline='', encoding='gbk') as csvfile_1:
-    with open('result_g_t_a_{}_noemo.csv'.format(modelname), 'w', newline='', encoding='gbk') as csvfile:
+with open('g_t_a_dataset_enhance_t.csv', 'r', newline='', encoding='gbk') as csvfile_1:
+    with open('result_g_t_a_{}_noenhance.csv'.format(modelname), 'w', newline='', encoding='gbk') as csvfile:
         reader = csv.DictReader(csvfile_1)
         fieldnames = ['ID', 'Generated Response']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -20,9 +20,7 @@ with open('g_t_a_dataset.csv', 'r', newline='', encoding='gbk') as csvfile_1:
         # 读取CSV文件内容
         nn = 0
         for row in reader:
-            print(row['e_template'])
-            print(row['Question'])
-            print(row['conditions'])
+            print(row['e_template_change'])
 
 
             prompt = """
@@ -31,7 +29,7 @@ with open('g_t_a_dataset.csv', 'r', newline='', encoding='gbk') as csvfile_1:
             Control Conditions: {conditions}
             Question: {question}
             Please generate:
-            """.format(template = row['Template'].strip() ,conditions = row['conditions'].strip(),question =  row['Question'].strip())
+            """.format(template = row['e_template_change'].strip() ,conditions = row['conditions'].strip(),question =  row['Question'].strip())
 
             
 
